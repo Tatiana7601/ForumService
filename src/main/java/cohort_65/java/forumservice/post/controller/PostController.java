@@ -1,14 +1,13 @@
 package cohort_65.java.forumservice.post.controller;
 
-import cohort_65.java.forumservice.post.dto.CommentDto;
-import cohort_65.java.forumservice.post.dto.NewPostDto;
-import cohort_65.java.forumservice.post.dto.PostDto;
-import cohort_65.java.forumservice.post.dto.PostPeriodDto;
+import cohort_65.java.forumservice.post.dto.*;
 import cohort_65.java.forumservice.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/forum")
@@ -27,21 +26,29 @@ public class PostController {
     public PostDto findPostById(@PathVariable String id){
         return postService.getPostById(id);
     }
-
+/*
     @PutMapping("/post/{id}/like")
     public PostDto addLikeToPost(@PathVariable String id){
         return postService.addLike(id);
     }
 
+ */
+    @PutMapping("/post/{id}/like")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addLikeToPost(@PathVariable String id){
+         postService.addLike(id);
+    }
+
     @GetMapping("/posts/author/{author}")
-    public List<PostDto> findPostByAuthor(@PathVariable String author){
+    public Iterable<PostDto> findPostByAuthor(@PathVariable String author){
         return postService.findPostsByAuthor(author);
     }
 
-    @PutMapping("/post/{id}/comment")
+    @PutMapping("/post/{id}/comment/{user}")
     public PostDto addCommentToPost(@PathVariable String id,
-                                    @RequestBody CommentDto commentDto){
-        return postService.addCommentToPost(id,commentDto);
+                                    @PathVariable String user,
+                                    @RequestBody NewCommentDto newCommentDto){
+        return postService.addCommentToPost(id, user, newCommentDto);
     }
 
     @DeleteMapping("/post/{id}")
@@ -49,13 +56,13 @@ public class PostController {
         return postService.deletePostById(id);
    }
 
-   @PostMapping("/posts/findByTags")
-   public List<PostDto> findPostsByTags(@RequestBody PostDto postDto){
-        return postService.findPostsByTags(postDto);
+   @PostMapping("/posts/tags")
+   public Iterable<PostDto> findPostsByTags(@RequestBody Set<String> tags){
+        return postService.findPostsByTags(tags);
    }
 
    @PostMapping("/posts/findByPeriod")
-   public List<PostDto> findPostsByPeriod(@RequestBody PostPeriodDto periodDto){
+   public Iterable<PostDto> findPostsByPeriod(@RequestBody PostPeriodDto periodDto){
         return postService.findPostsByPeriod(periodDto);
    }
 

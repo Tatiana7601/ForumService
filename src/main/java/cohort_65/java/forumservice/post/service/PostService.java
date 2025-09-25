@@ -1,12 +1,10 @@
 package cohort_65.java.forumservice.post.service;
 
-import cohort_65.java.forumservice.post.dto.CommentDto;
-import cohort_65.java.forumservice.post.dto.NewPostDto;
-import cohort_65.java.forumservice.post.dto.PostDto;
-import cohort_65.java.forumservice.post.dto.PostPeriodDto;
+import cohort_65.java.forumservice.post.dto.*;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PostService {
 
@@ -14,17 +12,17 @@ public interface PostService {
 
     PostDto getPostById(String id);
 
-    PostDto addLike(@PathVariable String id);
+    void addLike( String id);
 
-    List<PostDto> findPostsByAuthor(String author);
+    Iterable<PostDto> findPostsByAuthor(String author);
 
-    PostDto addCommentToPost(String id, CommentDto newComment);
+    PostDto addCommentToPost(String id, String user, NewCommentDto newCommentDto);
 
     PostDto deletePostById(String id);
 
-    List<PostDto> findPostsByTags(PostDto postDto);
+    Iterable<PostDto> findPostsByTags(Set<String> tags);
 
-    List<PostDto> findPostsByPeriod(PostPeriodDto periodDto);
+    Iterable<PostDto> findPostsByPeriod(PostPeriodDto periodDto);
 
     PostDto updatePost(String id, PostDto postDto);
 }
