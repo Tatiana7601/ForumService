@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.HashSet;
@@ -14,29 +15,36 @@ import java.util.Set;
 @NoArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 public class Account {
-    String id;
+    @Id
     String login;
     String password;
     @Setter
     String firstName;
     @Setter
     String lastName;
-    @Setter
-    Set<Role> roles = new HashSet<>();
+    Set<Role> roles;
+
+    public Account(String login, String password) {
+        roles = new HashSet<>();
+        roles.add(Role.USER);
+    }
 
     public Account(String login, String password, String firstName,
                    String lastName) {
 
+        this();
         this.login = login;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.roles = new HashSet<>();
     }
 
 
-    public boolean addRole(Role role) {
-        return roles.add(role);
+
+
+    public boolean addRole(String role) {
+
+        return roles.add(Role.valueOf(role.toUpperCase()));
     }
 
     public boolean removeRole(Role role) {

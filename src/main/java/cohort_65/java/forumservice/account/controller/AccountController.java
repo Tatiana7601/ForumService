@@ -27,6 +27,7 @@ public class AccountController {
 
     @GetMapping("/user/{login}")
     public AccountDto getUser(@PathVariable String login) {
+
         return accountService.getUserByLogin(login);
     }
 
@@ -40,7 +41,7 @@ public class AccountController {
                                  @RequestBody UpdateUserDto updateUserDto) {
     return accountService.updateUser(login,updateUserDto);
     }
-
+        // todo зробити загальний метод для видалення/додавання ролі
     @PutMapping("/user/{login}/role/{role}")
     public AccountDto addRole(@PathVariable String login,@PathVariable String role) {
         return accountService.addRole(login,role);

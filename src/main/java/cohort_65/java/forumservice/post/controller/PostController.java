@@ -26,13 +26,7 @@ public class PostController {
     public PostDto findPostById(@PathVariable String id){
         return postService.getPostById(id);
     }
-/*
-    @PutMapping("/post/{id}/like")
-    public PostDto addLikeToPost(@PathVariable String id){
-        return postService.addLike(id);
-    }
 
- */
     @PutMapping("/post/{id}/like")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void addLikeToPost(@PathVariable String id){

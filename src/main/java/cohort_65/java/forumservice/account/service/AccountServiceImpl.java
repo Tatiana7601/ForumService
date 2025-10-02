@@ -4,6 +4,7 @@ import cohort_65.java.forumservice.account.dao.AccountRepository;
 import cohort_65.java.forumservice.account.dto.AccountDto;
 import cohort_65.java.forumservice.account.dto.NewAccountDto;
 import cohort_65.java.forumservice.account.dto.UpdateUserDto;
+import cohort_65.java.forumservice.account.dto.exception.AccountExistsException;
 import cohort_65.java.forumservice.account.dto.exception.RoleNotFoundExeption;
 import cohort_65.java.forumservice.account.model.Account;
 import cohort_65.java.forumservice.account.model.Role;
@@ -23,8 +24,10 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     public AccountDto register(NewAccountDto newAccountDto) {
+        if (accountRepository.existsByLogin(newAccountDto.getLogin())) {
+            throw new AccountExistsException();
+        }
         Account account = modelMapper.map(newAccountDto, Account.class);
-        account.addRole(Role.USER);
         accountRepository.save(account);
 
         return modelMapper.map(account, AccountDto.class);
@@ -75,7 +78,7 @@ public class AccountServiceImpl implements AccountService{
 
         return modelMapper.map(account, AccountDto.class);
     }
-
+//todo переробити метод
     @Override
     public AccountDto addRole(String login, String role) {
 
