@@ -1,16 +1,16 @@
 package cohort_65.java.forumservice.post.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Singular;
+import jdk.jshell.Snippet;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PostDto {
     String id;
     String title;
@@ -23,5 +23,6 @@ public class PostDto {
     LocalDateTime dateCreated;
     @Singular
     List<CommentDto> comments;
+
 
 }

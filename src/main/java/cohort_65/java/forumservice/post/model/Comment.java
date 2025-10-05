@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 @Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of ={"user", "dateCreated"})
 public class Comment {

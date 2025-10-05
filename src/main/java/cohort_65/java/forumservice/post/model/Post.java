@@ -11,17 +11,21 @@ import java.util.Set;
 
 @Document(collection = "posts")
 @Getter
+@Setter
 @EqualsAndHashCode(of={"id"})
 @NoArgsConstructor
 public class Post {
+
     String id;
-    @Setter
+
     String title;
-    @Setter
+
     String content;
-    @Setter
+
     String author;
+
     LocalDateTime dateCreated = LocalDateTime.now();
+
     Set<String> tags = new HashSet<String>();
     Integer likes =0;
     List<Comment> comments = new ArrayList<Comment>();
