@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Getter
-@Setter
 @NoArgsConstructor
-@EqualsAndHashCode(of ={"user", "dateCreated"})
+@EqualsAndHashCode(of = { "user", "dateCreated"})
 public class Comment {
     @Setter
     String user;
@@ -21,9 +21,9 @@ public class Comment {
     public Comment(String user, String message) {
         this.user = user;
         this.message = message;
-
     }
-    public void addLike(){
+
+    public void addLike() {
         likes++;
     }
 }

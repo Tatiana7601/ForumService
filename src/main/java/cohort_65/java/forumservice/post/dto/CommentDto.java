@@ -1,20 +1,17 @@
 package cohort_65.java.forumservice.post.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class CommentDto {
-
     String user;
     String message;
     Integer likes;
-    LocalDateTime dateCreated = LocalDateTime.now();
-
-
+    LocalDateTime dateCreated;
 }
