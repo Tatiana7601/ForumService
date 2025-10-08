@@ -38,12 +38,12 @@ public class PostController {
     }
 
     @DeleteMapping("/post/{id}")
-    @PreAuthorize("hasRole('MODER') or @postService.isOwner(#id, authentication.name)")
+    //@PreAuthorize("hasRole('MODER') or @postService.isOwner(#id, authentication.name)")
     public PostDto deletePost(@PathVariable String id) {
         return postService.deletePostById(id);
     }
 
-    @PreAuthorize("hasRole('MODER') or @postService.isOwner(#id, authentication.name)")
+    //@PreAuthorize("hasRole('MODER') or @postService.isOwner(#id, authentication.name)")
     @PutMapping("/post/{id}")
     public PostDto updatePost(@PathVariable String id, @RequestBody NewPostDto newPostDto) {
         return postService.updatePostById(newPostDto, id);

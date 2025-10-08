@@ -5,6 +5,7 @@ import cohort_65.java.forumservice.accounting.dto.UserRegisterDto;
 import cohort_65.java.forumservice.accounting.dto.UserUpdateDto;
 import cohort_65.java.forumservice.accounting.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -54,4 +55,9 @@ public class UserAccountController {
         return userAccountService.getUserByLogin(principal.getName());
     }
 
+    @PutMapping("/password")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updatePassword(Principal principal, @RequestHeader("X-Password") String newPassword) {
+        userAccountService.changePassword(principal.getName(), newPassword);
+    }
 }
